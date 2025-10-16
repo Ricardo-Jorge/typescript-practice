@@ -20,6 +20,7 @@ console.log("Result of multiplyArgs Function: ", multiplyArgs(2, 4, 6, 8, 10));
 
 // Tuple
 const clientData: [string, string, number] = ["Ricardo", "Jorge", 35];
+const clientData2: readonly string[] = ["Ricardo", "Jorge"];
 console.log(clientData);
 
 clientData[0] = "Marianna";
@@ -70,3 +71,30 @@ function noReturn(...args: string[]): void {
 noReturn("Ricardo", "Lemos", "Azevedo", "Jorge");
 
 employee.showName();
+
+// Enum
+
+enum Colors {
+  RED,
+  BLUE,
+  GREEN,
+}
+
+function setColor(color: Colors) {
+  console.log("Color set to:", Colors[color]);
+}
+
+setColor(Colors.GREEN);
+
+console.log(Colors);
+console.log(Colors[0]);
+console.log(Colors.BLUE);
+
+function addOrConcat(a: number | string, b: number | string) {
+  if (typeof a === "number" && typeof b === "number") return a + b;
+  return `${a}${b}`;
+}
+
+console.log(addOrConcat(5, 11));
+console.log(addOrConcat("5", "11"));
+console.log(addOrConcat(5, "11"));
