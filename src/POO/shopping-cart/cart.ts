@@ -1,5 +1,5 @@
 export class Cart {
-  private products: Array<Product> = [];
+  private readonly products: Array<Product> = [];
 
   addProduct(product: Product) {
     this.products.push(product);
