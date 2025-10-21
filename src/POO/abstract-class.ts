@@ -1,4 +1,6 @@
-export class Character {
+export abstract class Character {
+  protected abstract emoji: string;
+
   constructor(
     protected name: string,
     protected power: number,
@@ -9,7 +11,8 @@ export class Character {
 
   attack(character: Character) {
     if (this.status === Status.DEAD) return console.log("Game Over");
-    console.log(`${this.name} is attacking...\n`);
+    console.log(`${this.name} is attacking...`);
+    this.catchphrase();
     this.checkWhoIsStronger(character);
   }
 
@@ -30,6 +33,8 @@ export class Character {
     }
     console.log(`${this.name} has ${this.life} life remaining.\n`);
   }
+
+  abstract catchphrase(): void;
 }
 
 enum Status {
@@ -37,11 +42,24 @@ enum Status {
   "DEAD",
 }
 
-export class Warrior extends Character {}
-export class Monster extends Character {}
+export class Warrior extends Character {
+  protected emoji = "\u03A9";
+
+  catchphrase(): void {
+    console.log(this.emoji + " I am Kratos, GOD OF WAR!\n");
+  }
+}
+export class Monster extends Character {
+  protected emoji = "\u2623";
+  catchphrase(): void {
+    console.log(
+      this.emoji + " There is no escape. No hope. Only hunger and pain.\n"
+    );
+  }
+}
 
 const kratos = new Warrior("Kratos", 400, 250, 1000, Status.ALIVE);
-const sphinx = new Warrior("Sphinx", 240, 199, 750, Status.ALIVE);
+const sphinx = new Monster("Sphinx", 240, 199, 750, Status.ALIVE);
 
 kratos.attack(sphinx);
 sphinx.attack(kratos);
